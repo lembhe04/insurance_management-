@@ -1,0 +1,71 @@
+{% extends "insurance/base_public.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Customer Sign Up | Insurance Management System{% endblock %}
+
+{% block content %}
+<section class="page-content section-alt">
+  <div class="container">
+    <div class="auth-layout auth-layout-wide">
+      <div class="auth-info">
+        <p class="section-label">Join us</p>
+        <h1>Create your customer account</h1>
+        <p class="auth-info-lead">Sign up to explore insurance policies and apply for coverage online in minutes.</p>
+        <ul class="auth-features">
+          <li><i class="fas fa-check-circle"></i> Free account registration</li>
+          <li><i class="fas fa-check-circle"></i> Apply for policies online</li>
+          <li><i class="fas fa-check-circle"></i> Track your application history</li>
+        </ul>
+      </div>
+
+      <div class="auth-card">
+        <h2>Customer sign up</h2>
+        <p class="auth-card-subtitle">Fill in your details to get started</p>
+        <form method="POST" autocomplete="off" enctype="multipart/form-data" class="auth-form" novalidate>
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="{{ userForm.username.id_for_label }}">Username</label>
+              {% render_field userForm.username|attr:'required:true' class="form-control contact-input" placeholder="Choose a username" %}
+            </div>
+            <div class="form-group col-md-6">
+              <label for="{{ userForm.password.id_for_label }}">Password</label>
+              {% render_field userForm.password|attr:'required:true' class="form-control contact-input" placeholder="Create a password" %}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="{{ userForm.first_name.id_for_label }}">First Name</label>
+              {% render_field userForm.first_name|attr:'required:true' class="form-control contact-input" placeholder="First name" %}
+            </div>
+            <div class="form-group col-md-6">
+              <label for="{{ userForm.last_name.id_for_label }}">Last Name</label>
+              {% render_field userForm.last_name|attr:'required:true' class="form-control contact-input" placeholder="Last name" %}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="{{ customerForm.mobile.id_for_label }}">Mobile</label>
+              {% render_field customerForm.mobile|attr:'required:true' class="form-control contact-input" placeholder="Mobile number" %}
+            </div>
+            <div class="form-group col-md-6">
+              <label for="{{ customerForm.address.id_for_label }}">Address</label>
+              {% render_field customerForm.address|attr:'required:true' class="form-control contact-input" placeholder="Your address" %}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="{{ customerForm.profile_pic.id_for_label }}">Profile Picture</label>
+            {% render_field customerForm.profile_pic|attr:'required:true' class="form-control contact-file-input" %}
+          </div>
+          <button type="submit" class="btn-contact-submit">
+            <i class="fas fa-user-plus"></i> Create Account
+          </button>
+        </form>
+        <p class="auth-switch">
+          Already have an account? <a href="/customer/customerlogin">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

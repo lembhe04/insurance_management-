@@ -1,0 +1,138 @@
+{% extends "insurance/base_public.html" %}
+
+{% block title %}Home | Insurance Management System{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="container hero-content">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <div class="hero-badge">
+          <i class="fas fa-check-circle"></i>
+          Trusted insurance management platform
+        </div>
+        <h1>Protect what matters <span>most</span> to you</h1>
+        <p class="hero-lead">
+          Browse insurance policies, apply online in minutes, and track your applications — all in one place.
+        </p>
+        <div class="hero-actions">
+          <a href="/customer/customerclick" class="btn-hero-primary">
+            <i class="fas fa-user"></i> Get Started as Customer
+          </a>
+          <a href="/adminlogin" class="btn-hero-outline">
+            <i class="fas fa-lock"></i> Admin Login
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <strong>Easy</strong>
+            <span>Online applications</span>
+          </div>
+          <div class="hero-stat">
+            <strong>Fast</strong>
+            <span>Quick approvals</span>
+          </div>
+          <div class="hero-stat">
+            <strong>Secure</strong>
+            <span>Your data protected</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container text-center">
+    <p class="section-label">Why choose us</p>
+    <h2 class="section-title">Everything you need in one platform</h2>
+    <p class="section-desc">Whether you're a customer looking for coverage or an admin managing policies — we've got you covered.</p>
+    <div class="row">
+      <div class="col-md-4 mb-4 mb-md-0">
+        <div class="feature-card">
+          <div class="feature-icon blue"><i class="fas fa-file-contract"></i></div>
+          <h3>Browse Policies</h3>
+          <p>Explore insurance categories and compare policies by premium, coverage, and tenure before you apply.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4 mb-md-0">
+        <div class="feature-card">
+          <div class="feature-icon green"><i class="fas fa-clipboard-check"></i></div>
+          <h3>Apply Online</h3>
+          <p>Submit your application in a few clicks. Track status from pending to approved in your dashboard.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon amber"><i class="fas fa-headset"></i></div>
+          <h3>Ask Questions</h3>
+          <p>Not sure which policy fits? Ask our team directly and get answers in your question history.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="section-label">How it works</p>
+      <h2 class="section-title">Three simple steps</h2>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h4>Create an account</h4>
+          <p>Sign up as a customer with your details, or log in as an admin to manage the system.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h4>Choose a policy</h4>
+          <p>Browse available insurance policies and submit your application online.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h4>Get approved</h4>
+          <p>Admins review your request. Track approval status anytime from your dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote-section">
+  <div class="container">
+    <blockquote>
+      "Whole life does two things for you: Protects your family and allows you to save for your future."
+      <cite>— Insurance wisdom</cite>
+    </blockquote>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>Ready to get started?</h2>
+    <p>Join as a customer today or sign in to manage policies as an administrator.</p>
+    <a href="/customer/customersignup" class="btn-hero-primary mr-2 mb-2">Create Customer Account</a>
+    <a href="/adminlogin" class="btn-hero-outline btn-hero-outline-dark mb-2">Admin Sign In</a>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  window.addEventListener('scroll', function () {
+    var nav = document.getElementById('mainNav');
+    if (window.scrollY > 20) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+</script>
+{% endblock %}

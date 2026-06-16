@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <title>{% block title %}Customer Dashboard{% endblock %} | Insurance Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body class="dashboard-body">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="dashboard-layout">
+    <aside class="dashboard-sidebar" id="dashboardSidebar">
+      <a href="/customer/customer-dashboard" class="sidebar-brand">
+        <i class="fas fa-shield-alt"></i>
+        Insurance Management
+      </a>
+
+      <div class="sidebar-profile">
+        <img src="{% static customer.profile_pic.name %}" alt="{{ request.user.first_name }}">
+        <h4>{{ request.user.first_name }} {{ request.user.last_name }}</h4>
+        <span>Customer</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="/customer/customer-dashboard" class="{% if 'customer-dashboard' in request.path %}active{% endif %}">
+          <i class="fas fa-gauge-high"></i> Dashboard
+        </a>
+        <a href="/customer/apply-policy" class="{% if 'apply-policy' in request.path or '/apply/' in request.path %}active{% endif %}">
+          <i class="fas fa-file-contract"></i> Apply Policy
+        </a>
+        <a href="/customer/history" class="{% if 'history' in request.path and 'question' not in request.path %}active{% endif %}">
+          <i class="fas fa-clock-rotate-left"></i> History
+        </a>
+        <a href="/customer/ask-question" class="{% if 'ask-question' in request.path %}active{% endif %}">
+          <i class="fas fa-circle-question"></i> Ask Question
+        </a>
+        <a href="/customer/question-history" class="{% if 'question-history' in request.path %}active{% endif %}">
+          <i class="fas fa-comments"></i> Question History
+        </a>
+      </nav>
+    </aside>
+
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="topbar-title">{% block page_title %}Dashboard{% endblock %}</h1>
+        </div>
+        <a href="/logout" class="btn-logout">
+          <i class="fas fa-right-from-bracket"></i> Logout
+        </a>
+      </header>
+
+      <main class="dashboard-content">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var toggle = document.getElementById('sidebarToggle');
+      var sidebar = document.getElementById('dashboardSidebar');
+      var overlay = document.getElementById('sidebarOverlay');
+      if (!toggle || !sidebar || !overlay) return;
+      toggle.addEventListener('click', function () {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('open');
+      });
+      overlay.addEventListener('click', function () {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('open');
+      });
+    })();
+  </script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

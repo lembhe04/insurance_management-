@@ -1,0 +1,59 @@
+{% extends 'customer/customerbase.html' %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="dash-welcome">
+  <h1>Welcome back, {{ request.user.first_name }}!</h1>
+  <p>Here's an overview of your insurance activity.</p>
+</div>
+
+<div class="stat-grid">
+  <a href="/customer/apply-policy" class="stat-card">
+    <div class="stat-card-header">
+      <span class="stat-card-label">Available Policies</span>
+      <span class="stat-card-icon green"><i class="fas fa-file-contract"></i></span>
+    </div>
+    <div class="stat-card-value">{{ available_policy }}</div>
+  </a>
+
+  <a href="/customer/history" class="stat-card">
+    <div class="stat-card-header">
+      <span class="stat-card-label">Applied Policies</span>
+      <span class="stat-card-icon blue"><i class="fas fa-clipboard-check"></i></span>
+    </div>
+    <div class="stat-card-value">{{ applied_policy }}</div>
+  </a>
+
+  <a href="/customer/apply-policy" class="stat-card">
+    <div class="stat-card-header">
+      <span class="stat-card-label">Policy Categories</span>
+      <span class="stat-card-icon red"><i class="fas fa-layer-group"></i></span>
+    </div>
+    <div class="stat-card-value">{{ total_category }}</div>
+  </a>
+
+  <a href="/customer/question-history" class="stat-card">
+    <div class="stat-card-header">
+      <span class="stat-card-label">Questions Asked</span>
+      <span class="stat-card-icon amber"><i class="fas fa-circle-question"></i></span>
+    </div>
+    <div class="stat-card-value">{{ total_question }}</div>
+  </a>
+</div>
+
+<div class="dash-panel">
+  <h2>Quick Actions</h2>
+  <div class="quick-actions">
+    <a href="/customer/apply-policy" class="quick-action-btn">
+      <i class="fas fa-plus"></i> Apply for Policy
+    </a>
+    <a href="/customer/ask-question" class="quick-action-btn">
+      <i class="fas fa-paper-plane"></i> Ask a Question
+    </a>
+    <a href="/customer/history" class="quick-action-btn">
+      <i class="fas fa-clock-rotate-left"></i> View History
+    </a>
+  </div>
+</div>
+{% endblock %}

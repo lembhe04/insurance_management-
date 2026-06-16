@@ -1,0 +1,48 @@
+{% extends "insurance/base_public.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Admin Login | Insurance Management System{% endblock %}
+
+{% block content %}
+<section class="page-content section-alt">
+  <div class="container">
+    <div class="auth-layout">
+      <div class="auth-info">
+        <p class="section-label">Admin portal</p>
+        <h1>Sign in to manage policies</h1>
+        <p class="auth-info-lead">Access the admin dashboard to manage customers, categories, policies, and applications.</p>
+        <ul class="auth-features">
+          <li><i class="fas fa-check-circle"></i> Manage insurance policies</li>
+          <li><i class="fas fa-check-circle"></i> Approve customer applications</li>
+          <li><i class="fas fa-check-circle"></i> Answer customer questions</li>
+        </ul>
+      </div>
+
+      <div class="auth-card">
+        <h2>Admin login</h2>
+        <p class="auth-card-subtitle">Enter your credentials to continue</p>
+        <form method="post" class="auth-form" novalidate>
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">Username</label>
+            {% render_field form.username class="form-control contact-input" placeholder="Enter username" %}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.password.id_for_label }}">Password</label>
+            {% render_field form.password class="form-control contact-input" placeholder="Enter password" %}
+          </div>
+          {% if form.non_field_errors %}
+            <div class="contact-field-error mb-3">{{ form.non_field_errors.0 }}</div>
+          {% endif %}
+          <button type="submit" class="btn-contact-submit">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </button>
+        </form>
+        <p class="auth-switch">
+          Are you a customer? <a href="/customer/customerlogin">Customer login</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <title>{% block title %}Admin Dashboard{% endblock %} | Insurance Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body class="dashboard-body">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="dashboard-layout">
+    <aside class="dashboard-sidebar" id="dashboardSidebar">
+      <a href="/admin-dashboard" class="sidebar-brand">
+        <i class="fas fa-shield-alt"></i>
+        Insurance Management
+      </a>
+
+      <div class="sidebar-profile">
+        <img src="{% static 'image/admin.png' %}" alt="Admin">
+        <h4>{{ request.user.first_name|default:request.user.username }}</h4>
+        <span>Administrator</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="/admin-dashboard" class="{% if request.path == '/admin-dashboard' %}active{% endif %}">
+          <i class="fas fa-gauge-high"></i> Dashboard
+        </a>
+        <a href="/admin-view-customer" class="{% if 'customer' in request.path %}active{% endif %}">
+          <i class="fas fa-users"></i> Customers
+        </a>
+        <a href="/admin-category" class="{% if 'category' in request.path %}active{% endif %}">
+          <i class="fas fa-layer-group"></i> Categories
+        </a>
+        <a href="/admin-policy" class="{% if 'policy' in request.path and 'holder' not in request.path %}active{% endif %}">
+          <i class="fas fa-file-contract"></i> Policies
+        </a>
+        <a href="/admin-question" class="{% if 'question' in request.path %}active{% endif %}">
+          <i class="fas fa-circle-question"></i> Questions
+        </a>
+      </nav>
+    </aside>
+
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="topbar-title">{% block page_title %}Dashboard{% endblock %}</h1>
+        </div>
+        <a href="/logout" class="btn-logout">
+          <i class="fas fa-right-from-bracket"></i> Logout
+        </a>
+      </header>
+
+      <main class="dashboard-content">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var toggle = document.getElementById('sidebarToggle');
+      var sidebar = document.getElementById('dashboardSidebar');
+      var overlay = document.getElementById('sidebarOverlay');
+      if (!toggle || !sidebar || !overlay) return;
+      toggle.addEventListener('click', function () {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('open');
+      });
+      overlay.addEventListener('click', function () {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('open');
+      });
+    })();
+  </script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
